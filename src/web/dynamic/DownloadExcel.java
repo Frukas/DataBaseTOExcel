@@ -2,9 +2,7 @@ package web.dynamic;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 
 import javax.servlet.ServletException;
@@ -14,8 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.ss.usermodel.Workbook;
-
+import project.dynamic.CustomQuery;
 import project.dynamic.WriteExcel;
 import project.dynamic.dbaRetrive;
 
@@ -37,7 +34,7 @@ public class DownloadExcel extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -45,7 +42,7 @@ public class DownloadExcel extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition", "attachment; filename=TExt.xlsx");
@@ -55,10 +52,12 @@ public class DownloadExcel extends HttpServlet {
 		ByteArrayInputStream  bis;
 		WriteExcel wrl = new WriteExcel(bos);
 		dbaRetrive dbr = new dbaRetrive();
+		CustomQuery cuq = new CustomQuery(dbr.getConnection());
+		String data1 = request.getParameter("StData");
 		int i;
 		
 		try {
-			wrl.writeBodyResultSet(dbr.getResultSet());
+			wrl.writeBodyResultSet(cuq.getCustomQuery(data1));
 			wrl.writeHeaders(head);
 			wrl.flushByte();
 		} catch (ParseException e) {

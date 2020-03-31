@@ -22,8 +22,8 @@ public void dbaConnector(){
 		Class.forName("com.mysql.cj.jdbc.Driver");  
 		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/sql_store?useTimezone=true&serverTimezone=UTC","root","root");  
 		
-		PreparedStatement prst = con.prepareStatement("Select * from orders"); 
-		rs = prst.executeQuery();		
+		//PreparedStatement prst = con.prepareStatement("Select * from orders"); 
+		//rs = prst.executeQuery();		
 	
 	}catch(Exception e){
 		
@@ -43,6 +43,10 @@ public void closeConnection() {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	} 
+}
+
+public Connection getConnection() {
+	return con;	
 }
 
 

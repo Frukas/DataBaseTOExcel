@@ -8,11 +8,12 @@
 </head>
 <body>
 
-<form action="DownloadExcel" method="post">
-	Data de inicio: <input type="date" name="StData">
-	Data Final: <input type="date" name="FnData">
-	<!--  <input type="submit"> -->
+<form action="DownloadExcel" method="get">
+	Data de inicio: <input type="date" name="StData"><br>	
+	<input type="submit">
 </form>
+
+
 
 </body>
 </html>
