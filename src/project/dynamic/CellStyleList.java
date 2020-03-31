@@ -1,5 +1,6 @@
 package project.dynamic;
 
+//Classe responsavel por formatar as celulas da planilha
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormat;
@@ -13,7 +14,7 @@ public class CellStyleList {
 	public CellStyleList(XSSFWorkbook workbook) {
 		this.book = workbook;
 	}
-	
+	//Fomatação dos Título
 	public CellStyle HeadStyle() {
 		CellStyle headStyle = book.createCellStyle();
 		headStyle.setBorderBottom(BorderStyle.THICK	);
@@ -24,7 +25,7 @@ public class CellStyleList {
 		
 		return headStyle;
 	}
-	
+	//Formatação dos dados da planilha
 	public CellStyle BodyStyle() {
 		CellStyle bodyStyle = book.createCellStyle();
 		bodyStyle.setBorderBottom(BorderStyle.THIN);
@@ -34,7 +35,7 @@ public class CellStyleList {
 		
 		return bodyStyle;
 	}
-	
+	//Formatação especial para as celulas com data
 	public CellStyle DataStyle() {
 		CellStyle dataStyle = book.createCellStyle();
 		DataFormat dform = book.createDataFormat();

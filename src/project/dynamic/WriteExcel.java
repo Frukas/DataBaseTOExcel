@@ -1,5 +1,6 @@
 package project.dynamic;
 
+//Classe responsavel por criar e preencher o arquivo excel.
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,6 +28,7 @@ public class WriteExcel {
 	private ByteArrayOutputStream bos;
 	private CellStyleList cstyle;
 	
+	//Construtor para deixar a planiha somente em memória
 	public WriteExcel(ByteArrayOutputStream bos) {
 			this.bos = bos;
 			this.book = new XSSFWorkbook();
@@ -34,7 +36,7 @@ public class WriteExcel {
 			this.cstyle = new CellStyleList(book);
 	}
 	
-		
+	//Construtor para gravar planilha em disco	
 	public WriteExcel(String filePath) {
 		try {
 			this.fos = new FileOutputStream(filePath);
@@ -47,7 +49,7 @@ public class WriteExcel {
 		}
 	}	
 	
-	
+	//Receber um array que são os títulos das colunas
 	public void writeHeaders(String headers[]) {
 		XSSFRow rw = sheet.createRow(0);
 		XSSFCell cl;
@@ -59,6 +61,7 @@ public class WriteExcel {
 		}		
 	}
 	
+	//Gera um excel baseado no resultado da query do banco de dados
 	public void writeBodyResultSet(ResultSet rs) throws ParseException {
 		XSSFRow rw ;
 		XSSFCell cl;

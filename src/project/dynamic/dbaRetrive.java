@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+//Classe de teste - uma vez que mude para ConnectionFactory ela não será mais necessária
 public class dbaRetrive {
 
 private ResultSet rs = null;

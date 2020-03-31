@@ -3,6 +3,7 @@ package web.dynamic;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.text.ParseException;
 
 import javax.servlet.ServletException;
@@ -45,21 +46,31 @@ public class DownloadExcel extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("application/octet-stream");
-		response.setHeader("Content-Disposition", "attachment; filename=TExt.xlsx");
-		String head[] = {"Order Id","Customer Id","Order Date","Status","Comments","Shipped Date","Shipped ID"};
+		response.setHeader("Content-Disposition", "attachment; filename=Text.xlsx");//Aqui pode mudar o nome do arquivo do download.
+		String head[] = {"Order Id","Customer Id","Order Date","Status","Comments","Shipped Date","Shipped ID"};// Importante!! mudar para o título das colunas
 		ServletOutputStream out = response.getOutputStream();
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		ByteArrayInputStream  bis;
+		ByteArrayInputStream  bis;		
 		WriteExcel wrl = new WriteExcel(bos);
-		dbaRetrive dbr = new dbaRetrive();
-		CustomQuery cuq = new CustomQuery(dbr.getConnection());
-		String data1 = request.getParameter("StData");
+		dbaRetrive dbr = new dbaRetrive(); //<-comentar essa linha caso mude para ConnectionFactory
+		//ConnectionFactory cof = new ConnectionFactory(); //<-Para  usar a classe que está acostumada
+		
+		
+		// Importante!!!  Mudar a classe CustomQuery 
+		CustomQuery cuq = new CustomQuery(dbr.getConnection()); //<-comentar essa linha caso mude para ConnectionFactory
+		//CustomQuery cuq = new CustomQuery(cof.getConnection());//<- usar a classe que está acostumada
+		
+		String dataStart = request.getParameter("StData");
+		String dataEnd = request.getParameter("EnData");
+		//String uname = request.getParameter("uname"); //Caso acrescente nome operador
 		int i;
 		
-		try {
-			wrl.writeBodyResultSet(cuq.getCustomQuery(data1));
-			wrl.writeHeaders(head);
-			wrl.flushByte();
+		try {			
+				wrl.writeBodyResultSet(cuq.getCustomQuery(dataStart, dataEnd));
+				//wrl.writeBodyResultSet(cuq.getCustomQuery(dataStart, dataEnd, uname)); //Caso acrescente nome operador
+				wrl.writeHeaders(head);
+				wrl.flushByte();
+			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
