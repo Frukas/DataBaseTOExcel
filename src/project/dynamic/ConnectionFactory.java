@@ -13,7 +13,7 @@ public class ConnectionFactory{
             Class.forName("com.mysql.cj.jdbc.Driver");
             String url = "jdbc:mysql://localhost:3306/apontamento?useTimezone=true&serverTimezone=UTC";
             String usuario = "root";
-            String senha = "Banny123@!@";
+            String senha = "****";
             return DriverManager.getConnection(url, usuario, senha);
             
         } catch (SQLException e) {
