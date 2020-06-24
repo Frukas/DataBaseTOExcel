@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link href="style/signin.css" rel="stylesheet">
+<script src="js/getUsers.js" type="text/javascript" charset="UTF-8"></script>
+<title>Relatório de Horas</title>
+</head>
+<body class="text-center">
+
+
+<form class="form-signin" action="DownloadExcel2" method="get">
+	<h1 class="display-5">Relatório Base</h1>
+	
+	Usuário: <select id="Lista" class="custom-select" name="uname" disabled></select>
+	<input type="checkbox" class="form-check-input" id="toogleUser" onclick=toogleUserList() name="toogleUser" value="turnOff"> 
+	<label for="toogleUser">Todos Usuários</label><br>
+	Data de inicio: <input type="date" class="form-control" name="StData"><br>	
+	Data de final : <input type="date" class="form-control" name="EnData"><br>
+	Formato:<br>
+	<input type="radio" class="custom-control-inline" checked name="formato" value="XLS"> XLS&nbsp;&nbsp;&nbsp;
+	<input type="radio" class="custom-control-inline" name="formato" value="XLSX"> XLSX<br><br>
+	
+	<input type="submit" class="btn btn-info" value="Gerar">
+</form>
+
+</body>
+</html>

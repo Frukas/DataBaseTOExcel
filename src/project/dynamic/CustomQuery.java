@@ -10,12 +10,16 @@ public class CustomQuery {
 	Connection con;
 	String dataStart;
 	
+	
+	//Para instanciar é necessário receber a conexão com o banco de dados.
 	public CustomQuery (Connection con) {
 		this.con = con;
 	}
+	
+	
 	//Retorna um query com data e fim informados
 	public ResultSet getCustomQuery(String dataStart, String dataEnd) {
-		String sql = "select* from orders where order_date >= ? and order_date <= ?";// mudar essa query para refletir a tabela sendo usado. O simbolo ? representa as datas.
+		String sql = "select chamado  , nome , data , tempo  , descricao  , detalhamento  from xxxxx  where data >= ? and data <= ?";// mudar essa query para refletir a tabela sendo usado. O simbolo ? representa as datas.
 		ResultSet rs = null;
 		try {
 			PreparedStatement st = con.prepareStatement(sql);
@@ -31,7 +35,7 @@ public class CustomQuery {
 	}
 	//Caso acrescente nome operador
 	public ResultSet getCustomQuery(String dataStart, String dataEnd, String Username) {
-		String sql = "select* from orders where order_date > ? and order_date < ? and username = ?";// mudar essa query para refletir a tabela sendo usada
+		String sql = "select chamado  , nome , data , tempo  , descricao  , detalhamento  from xxxxx  where data  > ? and data < ? and usuario = ?";// mudar essa query para refletir a tabela sendo usada
 		ResultSet rs = null;
 		try {
 			PreparedStatement st = con.prepareStatement(sql);

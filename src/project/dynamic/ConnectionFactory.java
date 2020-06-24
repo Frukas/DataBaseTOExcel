@@ -11,9 +11,9 @@ public class ConnectionFactory{
     public Connection getConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/apontamento?useTimezone=true&serverTimezone=UTC";
-            String usuario = "root";
-            String senha = "****";
+            String url = "jdbc:mysql://http://xx.xx.xx.xx/:3306/test?useTimezone=true&serverTimezone=UTC";
+            String usuario = "xxx";
+            String senha = "xx";
             return DriverManager.getConnection(url, usuario, senha);
             
         } catch (SQLException e) {

@@ -5,46 +5,67 @@ import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Workbook;
 
 public class CellStyleList {
 	
-	private	XSSFWorkbook book;
+	private	Workbook book;	
+	private CellStyle headStyle;
+	private CellStyle bodyStyle;
+	private CellStyle dataStyle;
+	private 
+	int in = 0;
 	
-	public CellStyleList(XSSFWorkbook workbook) {
+	public CellStyleList(Workbook workbook) {
 		this.book = workbook;
+		setHeadStyle();
+		setBodyStyle();
+		setDataStyle();
+		
 	}
-	//Fomatação dos Título
-	public CellStyle HeadStyle() {
-		CellStyle headStyle = book.createCellStyle();
+	
+	private void setHeadStyle() {
+		
+		headStyle = book.createCellStyle();
 		headStyle.setBorderBottom(BorderStyle.THICK	);
 		headStyle.setBorderLeft(BorderStyle.THICK);
 		headStyle.setBorderRight(BorderStyle.THICK);
 		headStyle.setBorderTop(BorderStyle.THICK);
 		headStyle.setAlignment(HorizontalAlignment.CENTER);
-		
-		return headStyle;
 	}
-	//Formatação dos dados da planilha
-	public CellStyle BodyStyle() {
-		CellStyle bodyStyle = book.createCellStyle();
+	
+	private void setBodyStyle() {	
+		
+		bodyStyle = book.createCellStyle();
 		bodyStyle.setBorderBottom(BorderStyle.THIN);
 		bodyStyle.setBorderLeft(BorderStyle.THIN);
 		bodyStyle.setBorderRight(BorderStyle.THIN);
 		bodyStyle.setAlignment(HorizontalAlignment.RIGHT);
-		
-		return bodyStyle;
 	}
-	//Formatação especial para as celulas com data
-	public CellStyle DataStyle() {
-		CellStyle dataStyle = book.createCellStyle();
+	
+	private void setDataStyle(){
+		
+		dataStyle = book.createCellStyle();
 		DataFormat dform = book.createDataFormat();
 		dataStyle.setDataFormat(dform.getFormat("yyyy/mm/dd"));
 		dataStyle.setWrapText(true);
 		dataStyle.setBorderBottom(BorderStyle.THIN);
 		dataStyle.setBorderLeft(BorderStyle.THIN);
 		dataStyle.setBorderRight(BorderStyle.THIN);
-		dataStyle.setAlignment(HorizontalAlignment.RIGHT);
+		dataStyle.setAlignment(HorizontalAlignment.RIGHT);		
+	}
+	//Fomataï¿½ï¿½o dos Tï¿½tulo
+	public CellStyle HeadStyle() {		
+		
+		return headStyle;
+	}
+	//Formataï¿½ï¿½o dos dados da planilha
+	public CellStyle BodyStyle() {	
+		
+		return bodyStyle;
+	}
+	//Formataï¿½ï¿½o especial para as celulas com data
+	public CellStyle DataStyle() {	
 		
 		return dataStyle;		
 	}
